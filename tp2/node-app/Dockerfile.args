@@ -1,0 +1,19 @@
+# Argument de build pour la version de Node (peut être changé au build)
+ARG NODE_VERSION=18
+
+FROM node:${NODE_VERSION}-alpine
+
+WORKDIR /app
+
+# Variables d'environnement
+ENV APP_ENV=production
+ENV PORT=3000
+
+COPY package.json .
+RUN npm ci --omit=dev
+
+COPY app-env.js ./app.js
+
+EXPOSE ${PORT}
+
+CMD ["npm", "start"]

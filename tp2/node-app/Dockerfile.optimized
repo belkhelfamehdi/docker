@@ -1,0 +1,16 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copier d'abord le package.json pour optimiser le cache
+COPY package.json .
+
+# Installer les dépendances (cette couche sera mise en cache si package.json ne change pas)
+RUN npm install
+
+# Copier le reste du code (changera plus souvent)
+COPY app.js .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

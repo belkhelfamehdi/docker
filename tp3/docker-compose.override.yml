@@ -1,0 +1,5 @@
+services:
+  api:
+    volumes:
+      - ./api:/app
+      - /app/node_modules
