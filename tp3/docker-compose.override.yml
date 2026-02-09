@@ -1,5 +1,15 @@
 services:
   api:
+    environment:
+      NODE_ENV: development
+    labels:
+      - "com.docker.compose.env=development"
     volumes:
       - ./api:/app
       - /app/node_modules
+
+  db:
+    ports:
+      - "5432:5432"
+    labels:
+      - "com.docker.compose.env=development"
